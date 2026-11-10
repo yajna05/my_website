@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yajna's Personal Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1abc9c;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #1abc9c;
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 100px 2rem 60px 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: 80vh;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            border-bottom: 3px solid #1abc9c;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://unsplash.com') no-repeat center center/cover;
+            color: white;
+            min-height: 100vh;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1abc9c;
+        }
+
+        /* About & Biodata Container */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .biodata-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .biodata-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .biodata-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .biodata-table td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+            width: 35%;
+        }
+
+        /* Social Activities List */
+        .activities {
+            margin-top: 1.5rem;
+        }
+
+        .activities h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .activities ul {
+            list-style-type: none;
+        }
+
+        .activities ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .activities ul li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #1abc9c;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #1abc9c;
+        }
+
+        .submit-btn {
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #16a085;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="logo">Yajna's Portfolio</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Welcome to My Personal Space</h1>
+        <p>B.E Student | Tech Enthusiast | Avid Reader</p>
+    </section>
+
+    <!-- About Me, Biodata, & Social Activities Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="container">
+            <div>
+                <h3>My Profile</h3>
+                <p style="margin-top: 0.5rem;">Hello! My name is Yajna. I am an engineering student (B.E) passionate about solving structural problems, exploring technology, and continuous learning. Alongside my tech journey, I am an enthusiastic reader who loves discovering new perspectives through books.</p>
+                
+                <div class="activities">
+                    <h3>Social Activities & Involvements</h3>
+                    <ul>
+                        <li>Active member of the student technical society and engineering forum.</li>
+                        <li>Organized and volunteered for institutional library book donation drives.</li>
+                        <li>Participated in peer tutoring groups to assist classmates with technical coursework.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3>Personal Biodata</h3>
+                <table class="biodata-table">
+                    <tr>
+                        <td>Full Name</td>
+                        <td>Yajna</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td>12 / 05 / 2009</td>
+                    </tr>
+                    <tr>
+                        <td>Education</td>
+                        <td>Bachelor of Engineering (B.E.)</td>
+                    </tr>
+                    <tr>
+                        <td>Core Skills</td>
+                        <td>Web Development Layouts, Critical Analytics</td>
+                    </tr>
+                    <tr>
+                        <td>Hobbies</td>
+                        <td>Reading Literature, Coding, Exploring Tech</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+<!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background-color: #34495e; color: white; display: flex; align-items: center; justify-content: center; height: 220px; font-weight: bold; border-radius: 8px;">
+                📚 Reading & Learning
+            </div>
+            <div class="gallery-item" style="background-color: #1abc9c; color: white; display: flex; align-items: center; justify-content: center; height: 220px; font-weight: bold; border-radius: 8px;">
+                ⚙️ Engineering Project
+            </div>
+            <div class="gallery-item" style="background-color: #e67e22; color: white; display: flex; align-items: center; justify-content: center; height: 220px; font-weight: bold; border-radius: 8px;">
+                💻 Digital Development
+            </div>
+        </div>
+    </section>
